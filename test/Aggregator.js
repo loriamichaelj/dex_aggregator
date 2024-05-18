@@ -1,9 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-
-const aggregator = (n) => {
-  return ethers.utils.parseUnits(n.toString(), "ether");
-};
+const config = require("../config.json");
 
 describe("Aggregator", () => {
   describe("Deployment", () => {
