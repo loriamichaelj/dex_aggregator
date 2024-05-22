@@ -5,21 +5,18 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+const config = require("../config.json");
 
 async function main() {
-  // const NAME = "Dapp University";
-  // const SYMBOL = "DAPP";
-  // const MAX_SUPPLY = "1000000";
-  // // Deploy Token
-  // const Token = await hre.ethers.getContractFactory("Token");
-  // let token = await Token.deploy(NAME, SYMBOL, MAX_SUPPLY);
-  // await token.deployed();
-  // console.log(`Token deployed to: ${token.address}\n`);
-  // // Deploy Aggregator
-  // const Aggregator = await hre.ethers.getContractFactory("Aggregator");
-  // let aggregator = await Aggregator.deploy();
-  // await aggregator.deployed();
-  // console.log(`Aggregator deployed to: ${aggregator.address}\n`);
+  // Deploy Aggregator
+  const aggregator = await hre.ethers.getContractFactory("Aggregator", [
+    config.UNISWAP.V2_ROUTER_02_ADDRESS,
+    config.SUSHISWAP.V2_ROUTER_02_ADDRESS,
+  ]);
+  await aggregator.waitForDeployment();
+  console.log(
+    `Aggregator contract deployed to: ${await aggregator.getAddress()}\n`
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere
