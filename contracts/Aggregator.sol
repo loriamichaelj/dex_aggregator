@@ -1,10 +1,12 @@
-// SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol"; // Importing ERC20 interface
 
-// [] Connect DEXes
-// [] Facilitate Swaps
+// [] connect dex
+// [] compare price between tokens pairs base on pool
+// [] facilitate swaps
 
 contract Aggregator {
     IUniswapV2Router02 public immutable routerA;
@@ -13,18 +15,13 @@ contract Aggregator {
 
     constructor(address _routerA, address _routerB) {
         routerA = IUniswapV2Router02(_routerA); // Uniswap
-        routerB = IUniswapV2Router02(_routerB); //
+        routerB = IUniswapV2Router02(_routerB); // Sushiswap
+        owner = msg.sender;
     }
 
-    function _swapOnDexA(
-        address[] memory _path,
-        uint256 _amountIn,
-        uint256 _amountOut
-    ) internal {}
+    function comparePrice() external {}
 
-    function _swapOnDexB(
-        address[] memory _path,
-        uint256 _amountIn,
-        uint256 _amountOut
-    ) internal {}
+    function swapOnDexA() external {}
+
+    function swapOnDexB() external {}
 }
